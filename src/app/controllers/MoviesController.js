@@ -1,10 +1,10 @@
-import Movie from '../models/Movie';
+import Movie from '../schemas/Movie';
 
 class MoviesController {
   async store(request, response) {
     const {
       tconst,
-      tconsttitleType,
+      titleType,
       primaryTitle,
       originalTitle,
       isAdult,
@@ -12,12 +12,12 @@ class MoviesController {
       endYear,
       runtimeMinutes,
       genres,
+      averageRating,
+      numVotes,
     } = request.body;
 
     const movieExists = await Movie.findOne({
-      where: {
-        tconst,
-      },
+      tconst,
     });
 
     if (movieExists) {
@@ -25,7 +25,7 @@ class MoviesController {
     }
     const movie = await Movie.create({
       tconst,
-      tconsttitleType,
+      titleType,
       primaryTitle,
       originalTitle,
       isAdult,
@@ -33,6 +33,8 @@ class MoviesController {
       endYear,
       runtimeMinutes,
       genres,
+      averageRating,
+      numVotes,
     });
 
     return response.json(movie);

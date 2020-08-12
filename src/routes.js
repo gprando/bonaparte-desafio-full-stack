@@ -2,13 +2,11 @@ import { Router } from 'express';
 
 // =========== Controllers ==========
 import MoviesController from './app/controllers/MoviesController';
+import DownloadFilesAndInsertDatasController from './app/controllers/DownloadFilesAndInsertDatasController';
 
 const routes = new Router();
 
-routes.get('/', (request, response) => {
-  return response.json({ message: 'hellow' });
-});
-
 routes.post('/movies', MoviesController.store);
+routes.post('/import', DownloadFilesAndInsertDatasController.store);
 
 export default routes;

@@ -1,13 +1,11 @@
-// certo !
-
 const { createWriteStream } = require('fs');
 const axios = require('axios');
-const fs = require('fs');
-const zlib = require('zlib');
+// const fs = require('fs');
+// const zlib = require('zlib');
 
-const gunzip = zlib.createGunzip();
+// const gunzip = zlib.createGunzip();
 
-async function downloadFile(fileUrl, outputLocationPath) {
+export default async function downloadFile(fileUrl, outputLocationPath) {
   const writer = createWriteStream(outputLocationPath);
 
   return axios({
@@ -32,15 +30,15 @@ async function downloadFile(fileUrl, outputLocationPath) {
   });
 }
 
-downloadFile(
-  'https://datasets.imdbws.com/title.basics.tsv.gz',
-  './data.tsv.gz'
-).then(() => {
-  const inFile = fs.createReadStream('./data.tsv.gz');
-  const out = fs.createWriteStream('./data.tsv');
+// downloadFile(
+//   'https://datasets.imdbws.com/title.basics.tsv.gz',
+//   './data.tsv.gz'
+// ).then(() => {
+//   const inFile = fs.createReadStream('./data.tsv.gz');
+//   const out = fs.createWriteStream('./data.tsv');
 
-  inFile.pipe(gunzip).pipe(out);
-});
+//   inFile.pipe(gunzip).pipe(out);
+// });
 
-// const partes = url.split('/');
-// const arquivo = createWriteStream(partes[partes.length - 1]);
+// // const partes = url.split('/');
+// // const arquivo = createWriteStream(partes[partes.length - 1]);

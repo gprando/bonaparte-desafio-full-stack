@@ -47,16 +47,6 @@ const MovieSchema = new mongoose.Schema({
     required: true,
   },
 
-  averageRating: {
-    type: Number,
-    required: true,
-  },
-
-  numVotes: {
-    type: Number,
-    required: true,
-  },
-
   createdAt: {
     type: Date,
     required: true,
@@ -70,4 +60,4 @@ const MovieSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Movie', MovieSchema);
+export default mongoose.model('Movie', MovieSchema);

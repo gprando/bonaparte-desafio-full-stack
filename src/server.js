@@ -8,7 +8,7 @@ import routes from './routes';
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bonaparte', {
+mongoose.connect('mongodb://localhost:27017/imdbData', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

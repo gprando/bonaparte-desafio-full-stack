@@ -18,3 +18,21 @@
     tconst (string) - identificador alfanumérico exclusivo do título
     averageRating - média ponderada de todas as avaliações individuais do usuário
     numVotes - número de votos que o título recebeu
+
+
+    // install mongo
+
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+    sudo apt-get install gnupg
+
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+    echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+    sudo apt-get update
+
+    sudo apt-get install -y mongodb-org
+
+
+    mongoimport --host=localhost:27017 -d movies -c moveis --type tsv --file temp/basic.tsv --headerline

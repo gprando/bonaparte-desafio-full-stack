@@ -17,30 +17,34 @@
       </form>
 
       <aside class="genres">
-        <span class="genres-span">
+        <span class="genres-span" @click.prevent="filterGenre('Drama')">
           <strong class="genres-strong">Drama</strong>
         </span>
 
-        <span class="genres-span">
+        <span class="genres-span" @click.prevent="filterGenre('Short')">
           <strong class="genres-strong">Short</strong>
         </span>
 
-        <span class="genres-span">
+        <span class="genres-span" @click.prevent="filterGenre('Musical')">
           <strong class="genres-strong">Musical</strong>
         </span>
 
-        <span class="genres-span">
+        <span class="genres-span" @click.prevent="filterGenre('Biography')">
           <strong class="genres-strong">Biography</strong>
         </span>
       </aside>
       <div class="buttons-container">
-        <button type="button">
+        <button
+          type="button"
+          :disabled="page === 1"
+          @click.prevent="decrementPage"
+        >
           {{ `>` }}
         </button>
 
-        <span>1</span>
+        <span>{{ page }}</span>
 
-        <button type="button">
+        <button type="button" @click.prevent="incrementPage">
           {{ `>` }}
         </button>
       </div>
@@ -65,8 +69,8 @@ export default {
   data() {
     return {
       movies: [],
-      genre: '',
       name: '',
+      page: 1,
     }
   },
 
@@ -76,7 +80,9 @@ export default {
 
   methods: {
     loadPage() {
-      api.get('movies').then((response) => (this.movies = response.data))
+      api
+        .get(`movies?page=${this.page}`)
+        .then((response) => (this.movies = response.data))
     },
 
     async filterName() {
@@ -85,8 +91,21 @@ export default {
       this.name = ''
     },
 
-    filterGenre() {
-      api.get('movies').then((response) => (this.movies = response.data))
+    async filterGenre(genre) {
+      const response = await api.get(`movies?genre=${genre}`)
+      this.movies = response.data
+    },
+
+    async decrementPage() {
+      this.page -= 1
+      const response = await api.get(`movies?page=${this.page}`)
+      this.movies = response.data
+    },
+
+    async incrementPage() {
+      this.page += 1
+      const response = await api.get(`movies?page=${this.page}`)
+      this.movies = response.data
     },
   },
 }
@@ -207,6 +226,7 @@ export default {
   margin: 0 30px;
 }
 .buttons-container button {
+  cursor: pointer;
   background: transparent;
   border: 0;
   color: #fff;

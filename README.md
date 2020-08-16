@@ -92,10 +92,10 @@ gunzip title.rating.tsv.gz
 - importe os dados para o banco
 ```bash
 # importa para dentro do mongo os dados dos filmes
-mongoimport --host=localhost:27017 -d movies -c movies --type tsv --file title.basic.tsv --headerline
+mongoimport --host=localhost:27017 -d imdbData -c movies --type tsv --file title.basics.tsv --headerline
 
 # importa para dentro do mongo os dados das votações dos filmes
-mongoimport --host=localhost:27017 -d movies -c movies --type tsv --file title.basics.tsv --headerline
+mongoimport --host=localhost:27017 -d imdbData -c ratings --type tsv --file title.rating.tsv --headerline
 ```
 
 ## Backend

@@ -83,8 +83,7 @@ yarn dev
 ### Insomnia 
 Para testar a API, baixe e instale o [Insomnia](https://insomnia.rest/download/) e em seguida clique no botão a baixo para importar o workspace.
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Ecoleta&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fgprando%2FNLW_1%2Fmaster%2Fbackend%2FInsomnia.json%3Ftoken%3DAL5YELH3YXHGUAUAVYKK33264EYSO)
-
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Desafio&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fgprando%2Fbonaparte-desafio-full-stack%2Fmaster%2Fbackend%2FInsomnia_2020-08-15.json)
 
 ### Frontend
 Para iniciar o **Frontend** do React utilize os comandos:

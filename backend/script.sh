@@ -20,4 +20,4 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 
 
-mongoimport --host=localhost:27017 -d movies -c moveis --type tsv --file temp/basic.tsv --headerline
+mongoimport --host=localhost:27017 -d movies -c movies --type tsv --file temp/basic.tsv --headerline

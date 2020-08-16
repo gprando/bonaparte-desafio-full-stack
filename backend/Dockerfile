@@ -1,20 +1,35 @@
-FROM node:slim
+FROM debian
 
-RUN apt-get update && apt-get install -y libaio1 wget unzip
+RUN apt-get update 
 
-WORKDIR /opt/oracle
+RUN apt-get install -y libaio1 wget unzip gnupg curl
 
-RUN wget https://download.oracle.com/otn_software/linux/instantclient/instantclient-basiclite-linuxx64.zip && \
-    unzip instantclient-basiclite-linuxx64.zip && rm -f instantclient-basiclite-linuxx64.zip && \
-    cd /opt/oracle/instantclient* && rm -f *jdbc* *occi* *mysql* *mql1* *ipc1* *jar uidrvci genezi adrci && \
-    echo /opt/oracle/instantclient* > /etc/ld.so.conf.d/oracle-instantclient.conf && ldconfig
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+
+RUN apt-get install -y nodejs
+
+RUN wget https://datasets.imdbws.com/title.basics.tsv.gz
+
+RUN gunzip title.basics.tsv.gz 
+
+# RUN wget https://datasets.imdbws.com/title.rating.tsv.gz
+
+# RUN gunzip title.rating.tsv.gz 
+
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+
+RUN echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+RUN apt-get update
+
+RUN apt-get install -y mongodb-org
+
+RUN mongoimport --host=localhost:27017 -d movies -c movies --type tsv --file temp/basic.tsv --headerline
 
 # Define qual diretório será usado para nossa aplicação dentro do container
 WORKDIR /usr/src/app
-
-ENV DB_HOST=default 
-ENV DB_USER=default 
-ENV DB_PASS=default 
 
 # Copia todos os arquivos que começam com package e tem extensão .json para o diretório definido acima
 COPY package*.json ./
@@ -33,6 +48,6 @@ RUN apt-get remove --purge -y wget unzip
 EXPOSE 3333
 
 # Roda a aplicação
-CMD [ "node", "./src/app.js" ]
+CMD [ "node", "./src/server.js" ]
 
 

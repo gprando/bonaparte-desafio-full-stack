@@ -59,18 +59,47 @@ Este desafio foi desenvolvido com o intuído de mostrar minhas habilidades nas t
 
 ##### Requisitos: 
 
-- Preferencialmente ambiente Unix.
-
-  
-
 Clone o projeto em seu computador.
-
 ```bash
 git clone https://github.com/gprando/bonaparte-desafio-full-stack
 ```
+- Preferencialmente ambiente Unix.
+
+- <a aria-label="Mongo" href="https://docs.mongodb.com/manual/administration/install-community/">
+   Ter instalado mongodb Community. 
+  </a>
+
+- Iniciar o mongoDB na porta 27017 (por padrão ele já inicia na 27017).
+```bash
+ sudo systemctl start mongod
+```
+- baixe os arquivos de dados 
+
+```bash
+# baixa o arquivo title.basics.tsv.gz
+wget https://datasets.imdbws.com/title.basics.tsv.gz
+
+# descompacta o aquivo
+gunzip title.basics.tsv.gz 
+
+# baixa o arquivo title.rating.tsv.gz
+wget https://datasets.imdbws.com/title.rating.tsv.gz
+
+# descompacta o aquivo
+gunzip title.rating.tsv.gz 
+```
+  
+- importe os dados para o banco
+```bash
+# importa para dentro do mongo os dados dos filmes
+mongoimport --host=localhost:27017 -d movies -c movies --type tsv --file title.basic.tsv --headerline
+
+# importa para dentro do mongo os dados das votações dos filmes
+mongoimport --host=localhost:27017 -d movies -c movies --type tsv --file title.basics.tsv --headerline
+```
 
 ## Backend
-Para instalar as dependências, importar os datos para o banco de dados e executar o **Servidor** (modo desenvolvimento) execute:
+Para instalar as dependências e executar o **Servidor** (modo desenvolvimento) execute:
 ```bash
 # entra na pasta
 cd backend
